@@ -64,10 +64,9 @@ const handleSubmit = (event) => {
         .then((response) => {
           console.log(response.data)
           toast.success("Application Submitted Successfully")
-          setEndDate(''),
-          setStartDate(''),
-          setReason(''),
-
+          setEndDate('');
+          setStartDate('');
+          setReason('');
           navigator('/leaveform');
         })
         .catch((error) => {
