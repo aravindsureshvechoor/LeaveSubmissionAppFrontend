@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import axios from 'axios';
-import { baseURL } from '../../api/api';
+import axiosInstance,{ baseURL } from '../../api/api';
+import { useNavigate } from 'react-router-dom';
 import {
   MDBBtn,
   MDBContainer,
@@ -39,6 +40,7 @@ const changReason = (event) => {
     setReason(event.target.value);
     setReasonError('');
   };
+
 const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -54,8 +56,8 @@ const handleSubmit = (event) => {
       }
     } else {
       
-      axios
-        .post(`${baseURL}leavemanagement/leavesubmission/`, {
+      axiosInstance
+        .post(`${baseURL}/api/leavemanagement/leavesubmission/`, {
           startdate: startdate,
           enddate: enddate,
           type_of_leave:reason,
@@ -74,10 +76,14 @@ const handleSubmit = (event) => {
         });
     }
     };
-
+const navigator = useNavigate();
+  const redirectToEmployeeHome = () => {
+    navigator('/employeehome');
+  };
 
   return (
     <>
+    <a onClick={redirectToEmployeeHome} className='text-black text-2xl cursor-pointer ml-2'>Go Back</a>
     <h1 className='text-4xl text-black pt-[100px] ml-[730px]'> Apply For A New Leave Here </h1>
     <MDBContainer fluid className='pt-[10px]'>
 

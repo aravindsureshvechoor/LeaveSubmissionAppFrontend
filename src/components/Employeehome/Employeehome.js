@@ -1,13 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Employeehome.css'; // Import CSS file
-
+import {useDispatch,useSelector} from 'react-redux';
+import { clearAuth } from '../../Redux/Userslice';
 const Employeehome = () => {
 
   const navigator = useNavigate()
   const redirectToLeaveForm = () => {
     navigator('/leaveform');
   };
+
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(clearAuth());
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    window.location.href = '/';
+  };
+
   return (
     <div>
       <h1 className='ml-[350px] text-6xl pt-[100px] pb-5 text-black'>Welcome to the Leave Submission Application</h1>
@@ -50,7 +61,7 @@ const Employeehome = () => {
         </tbody>
       </table>
       <div className="buttons-container">
-        <button className="logout-button bg-red-600 transform transition-transform hover:scale-110 hover:bg-red-600">Logout</button>
+        <button onClick={logout} className="logout-button bg-red-600 transform transition-transform hover:scale-110 hover:bg-red-600">Logout</button>
         <button onClick={redirectToLeaveForm} className="new-leave-button bg-green-600 transform transition-transform hover:scale-110 hover:bg-green-600">New Leave</button>
       </div>
     </div>

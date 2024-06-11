@@ -83,7 +83,7 @@ const changeEmail = (event) => {
           dispatch(setAccessToken({accessToken:response.data.data.access,refreshToken:response.data.data.refresh}));
           dispatch(setUser(response.data.user));
           toast.success('Login Successful');
-          navigator('/');
+          navigator('/employeehome');
         })
         .catch((error) => {
           console.log(error)
