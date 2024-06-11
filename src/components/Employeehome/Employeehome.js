@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Employeehome.css'; // Import CSS file
+import './Employeehome.css'; 
 import {useDispatch,useSelector} from 'react-redux';
 import { clearAuth } from '../../Redux/Userslice';
 const Employeehome = () => {

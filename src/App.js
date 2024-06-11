@@ -4,6 +4,7 @@ import Managerloginbox from './components/Managerlogin/Managerlogin';
 import Signup from './components/Signup/Signup';
 import Employeehome from './components/Employeehome/Employeehome';
 import Leaveform from './components/Leaveform/Leaveform';
+import Managerhome from './components/Managerhome/Managerhome';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/employeehome' element={<Employeehome/>}/>
         <Route path='/leaveform' element={<Leaveform/>}/>
+        <Route path='/managerhome' element={<Managerhome/>}/>
       </Routes>
     </Router>
   );
