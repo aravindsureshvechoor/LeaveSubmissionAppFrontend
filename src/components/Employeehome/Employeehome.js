@@ -21,12 +21,12 @@ const Employeehome = () => {
     window.location.href = '/';
   };
   const user = useSelector((state) => state.user); 
-  const [applicant_id, setApplicantId] = useState(null);
+  const [applicant_id, setAppliantid] = useState(null);
   const [leavedetails,setLeavedetails] = useState([]);
 
   useEffect(() => {
     if (user && user.user) {
-      setApplicantId(user.user.id);
+      setAppliantid(user.user.id);
     }
   }, [user]);
 
@@ -43,7 +43,7 @@ const Employeehome = () => {
     }
     };
     fetchData();
-  }, []);
+  }, [applicant_id, baseURL]);
 
 
   return (
