@@ -56,8 +56,8 @@ const handleSubmit = (event) => {
       }
     } else {
       
-      axiosInstance
-        .post(`${baseURL}/api/leavemanagement/leavesubmission/`, {
+      axios
+        .post(`${baseURL}leavemanagement/leavesubmission/`, {
           startdate: startdate,
           enddate: enddate,
           type_of_leave:reason,
@@ -69,7 +69,7 @@ const handleSubmit = (event) => {
           setEndDate('');
           setStartDate('');
           setReason('');
-          navigator('/leaveform');
+          navigator('/employeehome');
         })
         .catch((error) => {
           console.log(error)
@@ -99,8 +99,27 @@ const navigator = useNavigate();
               {startdateerror && <p className="error-message">{startdateerror}</p>}
               <MDBInput wrapperClass='mb-4 mx-5 w-100' value={enddate} onChange={changEndDate} className={`text-white form__field ${enddateerror ? 'error' : ''}`} labelClass='text-white' label='Enddate' id='formControlLg' type='text' size="lg"/>
             {enddateerror && <p className="error-message">{enddateerror}</p>}
-            <MDBInput wrapperClass='mb-4 mx-5 w-100' value={reason} onChange={changReason} className={`text-white form__field ${reasonerror ? 'error' : ''}`} labelClass='text-white' label='Leave   Type' id='formControlLg' type='text' size="lg"/>
-             {reasonerror && <p className="error-message">{reasonerror}</p>}
+
+
+             {/* ROLE */}
+              <div className='mb-4 mx-5 w-100'>
+      <label className='text-white' htmlFor='formControlLg'>Select The Leave Type</label>
+      <select
+        className={`text-black form-control form-control-lg form__field ${reasonerror ? 'error' : ''}`}
+        id='formControlLg'
+        value={reason}
+        onChange={changReason}
+      >
+        <option value='' disabled>Select Leave Type</option>
+        <option value='annual'>Annual</option>
+        <option value='sick'>Sick</option>
+        <option value='vacation'>Vacation</option>
+      </select>
+      {reasonerror && <p className={'error-message'}>{reasonerror}</p>}
+    </div>
+            {/* ROLE */}
+
+
               <MDBBtn outline onClick={handleSubmit} className='mx-2 px-5 mb-4 bg-[#ffc700] text-black transform transition-transform hover:scale-110 hover:bg-[#ffc700]'
  color='white' size='lg'>
                 Apply
