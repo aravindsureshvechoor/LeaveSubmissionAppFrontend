@@ -80,14 +80,22 @@ const changeEmail = (event) => {
           password: password,
         }, { withCredentials: true })
         .then((response) => {
-          console.log(response.data)
-          dispatch(setAccessToken({accessToken:response.data.data.access,refreshToken:response.data.data.refresh}));
-          dispatch(setUser(response.data.user));
-          toast.success('Login Successful');
-          navigator('/managerhome');
-        })
+    if (response.data.user['role'] === 'employee') {
+        toast.error("Bad credentials");
+    } else {
+        console.log(response.data);
+        dispatch(setAccessToken({
+            accessToken: response.data.data.access,
+            refreshToken: response.data.data.refresh
+        }));
+        dispatch(setUser(response.data.user));
+        toast.success('Login Successful');
+        navigator('/managerhome');
+    }
+})
         .catch((error) => {
-          console.log(error)
+          if (error.response.data && error.response.data["invalid"]) {
+    toast.error(error.response.data["invalid"]);}
         });
     }
     };

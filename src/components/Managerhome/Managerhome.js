@@ -25,6 +25,7 @@ const Managerhome = () => {
             <th className='text-black'>Reason</th>
             <th className='text-black'>Start Date</th>
             <th className='text-black'>End Date</th>
+            <th className='text-black'>Total Leaves</th>
             <th className='text-black text-center'>Action</th>
           </tr>
         </thead>
@@ -36,6 +37,7 @@ const Managerhome = () => {
             <td className='text-black'>Vacation</td>
             <td className='text-black'>2024-06-15</td>
             <td className='text-black'>2024-06-20</td>
+            <td className='text-black'>10</td>
             <div className="buttons-container">
         <button className="logout-button bg-red-600 transform transition-transform hover:scale-110 hover:bg-red-600">Decline</button>
         <button  className="new-leave-button bg-green-600 transform transition-transform hover:scale-110 hover:bg-green-600">Accept</button>
