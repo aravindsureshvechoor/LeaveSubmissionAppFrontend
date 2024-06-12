@@ -4,14 +4,16 @@ import { baseURL } from '../../api/api';
 import './Managerhome.css';
 import {useDispatch,useSelector} from 'react-redux';
 import { clearAuth } from '../../Redux/Userslice';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Managerhome = () => {
 
   const dispatch = useDispatch();
-
+  const navigator = useNavigate();
   const logout = () => {
     dispatch(clearAuth());
     localStorage.removeItem('accessToken');
@@ -36,6 +38,47 @@ const Managerhome = () => {
     fetchData();
   }, []);
 
+const acceptLeave = async (leave_id) => {
+  try {
+    
+    const response = await axios.patch(`${baseURL}leavemanagement/acceptleave/${leave_id}/`);
+    if (response.status === 200) {
+      toast.success("Leave Granted");
+      setLeavedetails(prevDetails =>
+          prevDetails.map(leave =>
+            leave.id === leave_id ? { ...leave, status: 'leave granted' } : leave
+          )
+        );
+        navigator('/managerhome');
+      console.log(response.data);
+    } else {
+      console.log(response.statusText);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const declineLeave = async (leave_id) => {
+  try {
+    
+    const response = await axios.patch(`${baseURL}leavemanagement/declineleave/${leave_id}/`);
+    if (response.status === 200) {
+      toast.success("Declined");
+      setLeavedetails(prevDetails =>
+          prevDetails.map(leave =>
+            leave.id === leave_id ? { ...leave, status: 'leave declined' } : leave
+          )
+        );
+        navigator('/managerhome');
+      console.log(response.data);
+    } else {
+      console.log(response.statusText);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   return (
     <div>
@@ -66,8 +109,8 @@ const Managerhome = () => {
             <td className='text-black text-center'>{leave.enddate}</td>
             <td className='text-black text-center'>{leave.total_leaves_by_applicant}</td>
             <td className='text-black text-center'>{leave.status}</td>
-        <button className="logout-button mb-2 mt-2 bg-red-600 transform transition-transform hover:scale-110 hover:bg-red-600">Decline</button>
-        <button  className="new-leave-button mb-2 mt-2 bg-green-600 transform transition-transform hover:scale-110 hover:bg-green-600">Accept</button>
+        <button onClick={() => declineLeave(leave.id)} className="logout-button mb-2 mt-2 bg-red-600 transform transition-transform hover:scale-110 hover:bg-red-600">Decline</button>
+        <button onClick={() => acceptLeave(leave.id)}  className="new-leave-button mb-2 mt-2 bg-green-600 transform transition-transform hover:scale-110 hover:bg-green-600">Accept</button>
           </tr>
           {/* Add more rows for additional leave requests */}
         </tbody>))}

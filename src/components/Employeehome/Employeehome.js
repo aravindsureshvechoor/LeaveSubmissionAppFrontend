@@ -63,7 +63,7 @@ const Employeehome = () => {
             <td className='text-black'>{leave.type_of_leave}</td>
             <td className='text-black'>{leave.startdate}</td>
             <td className='text-black'>{leave.enddate}</td>
-            <td className='text-black bg-yellow-500'>{leave.status}</td>
+            <td className='text-black '>{leave.status}</td>
           </tr>
 
           {/* Add more rows for additional leave requests */}
