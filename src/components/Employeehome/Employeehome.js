@@ -21,8 +21,14 @@ const Employeehome = () => {
     window.location.href = '/';
   };
   const user = useSelector((state) => state.user); 
-  const applicant_id = user.user.id
+  const [applicant_id, setApplicantId] = useState(null);
   const [leavedetails,setLeavedetails] = useState([]);
+
+  useEffect(() => {
+    if (user && user.user) {
+      setApplicantId(user.user.id);
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +50,11 @@ const Employeehome = () => {
     <div>
       <h1 className='ml-[350px] text-6xl pt-[100px] pb-5 text-black'>Welcome to the Leave Submission Application</h1>
       <h2 className='ml-[800px] pb-5 text-4xl text-black'>Leave Requests</h2>
-      <h1 className=' text-black text-3xl pb-3'>Employee Name : {user.user.name}</h1>
+     <h1 className='text-black text-3xl pb-3'>
+  {user && user.user ? `Employee Name: ${user.user.name}` : 'Employee Name: Not Available'}
+</h1>
+
+
       <table>
         <thead>
           <tr>
